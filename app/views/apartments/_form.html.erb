@@ -1,0 +1,23 @@
+<%= render 'shared/errors', obj: @apartment %>
+
+<div class = 'well'>
+  <%= form_for @apartment do |f| %>
+    <div class = 'control-group'>
+      <%= f.label :apartment_number %>
+      <%= f.text_field :apartment_number%>
+    </div>
+    <div class = 'control-group'>
+      <%= f.label :description %>
+      <%= f.text_area :description%>
+    </div>  
+    <div class = 'control-group'>
+      <%= f.label :rent %>
+      <%= f.text_field :rent %>
+    </div>
+      <div class = 'control-group'>
+      <%= f.label :date_available %>
+      <%= f.text_field :date_available%>
+    </div>
+    <br/>  
+    <%= f.submit(@apartment.new_record? ? 'Create Apartment' : 'Update Apartment', class:'btn btn-primary')%>
+  <% end %>

@@ -1,0 +1,28 @@
+<!-- obj = @ resident -->
+<h5>Packages for: <%= obj.first_name %> <%= obj.last_name %></h5>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Package #</th>
+        <th>Arrived On</th>
+        <th>Picked Up</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% i=1 %>   
+      <% obj.packages.each do |p| %>
+        <tr>
+          <% if p.picked_up == nil then %>
+            <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
+          <% else %>
+            <td><%= i %></td> 
+          <% end %>
+          <td><%= display_date(p.arrived)%></td> 
+          <td><%= display_date(p.picked_up)%></td> 
+        </tr>
+        <% i+=1 %>
+      <% end %>   
+    </tbody>
+  </table>
+</div>
