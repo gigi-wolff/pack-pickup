@@ -5,12 +5,15 @@
     <%= render 'shared/errors', obj: @package %>
     <div class = 'control-group'>
       <%= f.label :arrived %>
+      <br/>
       <%= f.text_field :arrived%>
     </div>
     <div class = 'control-group'>
       <%= f.label :picked_up %>
+      <br/>
       <%= f.text_field :picked_up %>
     </div>
     <br/>  
     <%= f.submit('Update Package', class:'btn btn-primary')%>
   <% end %>
+</div>

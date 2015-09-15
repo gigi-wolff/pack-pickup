@@ -11,7 +11,8 @@
  *= require_self
  *= require_tree .
  */
- @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
  .container {
   margin-left: 135px

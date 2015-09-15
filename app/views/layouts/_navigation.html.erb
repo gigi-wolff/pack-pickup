@@ -3,15 +3,28 @@
     <%= link_to "Package Pick-Up", root_path, :class => 'brand' %>
   </li>
 </ul>
-<div class='nav_item'>
-  <%= link_to 'Resident', residents_path, class: 'btn btn-success btn-large' %>
+
+<div class="btn-group nav_item">
+  <a class="btn btn-info" href="#"><i class="icon-user icon-white">
+  </i> Residents</a>
+  <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+    <ul class='dropdown-menu'>
+      <li>
+        <%= link_to new_resident_path do %>
+          <i class='icon-plus'></i>
+          Add Resident
+        <% end %>
+      </li>
+      <li>
+        <%= link_to residents_path do %>
+          <i class='icon-list'></i>
+          All Residents
+        <% end %>
+      </li>
+  </ul>
 </div>
+
 <div class='nav_item'>
-  <%= link_to 'Apartments', apartments_path, class: 'btn btn-primary btn-large' %>
-</div>
-<div class='nav_item'>
-  <%= link_to 'Add Resident', new_resident_path, class: 'btn btn-success btn-large' %>
+  <%= link_to 'View Apartments', apartments_path, class: 'btn btn-primary btn-large' %>
 </div>
 <br/>
-
-

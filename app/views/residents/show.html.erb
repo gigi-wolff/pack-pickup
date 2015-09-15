@@ -1,12 +1,14 @@
-<h2> Add a package: </h2>
+<h3> Add a package: </h3>
   <%= form_for [@resident, @package] do |f| %>
     <%= render 'shared/errors', obj: @package %>
     <div class = 'control-group'>
       <%= f.label :arrived %>
+      <br/>
       <%= f.text_field :arrived %>
     </div>
     <div class = 'control-group'>
       <%= f.label :picked_up %>
+      <br/>
       <%= f.text_field :picked_up%>
     </div>
     <br/>
