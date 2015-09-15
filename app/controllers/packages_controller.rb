@@ -1,5 +1,5 @@
 class PackagesController < ApplicationController
-  before_action :set_package, only: [:edit, :update]
+  before_action :set_package, only: [:edit, :update, :show]
   before_action :package_params, only: [:create]
 
   #GET /residents/:resident_id/packages/:id

@@ -1,8 +1,7 @@
 module ApplicationHelper
 
     def display_date(date)
-      date.strftime("%m/%d/%Y") unless date==nil #mm/dd/yyy 
+      date.strftime("%m/%d/%Y: %a") unless date==nil #mm/dd/yyy 
     end
-
 end
 

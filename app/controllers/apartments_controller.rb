@@ -41,7 +41,7 @@ class ApartmentsController < ApplicationController
   def set_apartment
     # ask ActiveRecord to find the Apartment object in the db using the id from params
     @apartment = Apartment.find(params[:id]) #looking at the model layer
-    #@post = Post.find_by(slug: params[:id])
+    #@apartment = Apartment.find_by(slug: params[:id])
   end
 
 

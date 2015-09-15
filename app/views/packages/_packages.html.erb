@@ -10,19 +10,29 @@
       </tr>
     </thead>
     <tbody>
-      <% i=1 %>   
+      <!-- list packages that have not been picked up first -->
+      <% i=1 %> 
       <% obj.packages.each do |p| %>
         <tr>
           <% if p.picked_up == nil then %>
             <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
-          <% else %>
-            <td><%= i %></td> 
+            <td><%= display_date(p.arrived)%></td> 
+            <td><%= display_date(p.picked_up)%></td>
+            <% i+=1 %>
           <% end %>
-          <td><%= display_date(p.arrived)%></td> 
-          <td><%= display_date(p.picked_up)%></td> 
+        </tr>          
+      <% end %>
+      <!-- list packages that have not been picked up first -->
+      <% obj.packages.each do |p| %>
+        <% if p.picked_up != nil then %>
+          <tr>
+            <td><%= i %></td> 
+            <td><%= display_date(p.arrived)%></td> 
+            <td><%= display_date(p.picked_up)%></td> 
+            <% i+=1 %>
+        <% end %>
         </tr>
-        <% i+=1 %>
-      <% end %>   
+      <% end %>  
     </tbody>
   </table>
 </div>

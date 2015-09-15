@@ -9,12 +9,12 @@ class ResidentsController < ApplicationController
 
   # GET '/residents/id'
   def show   # Here we display the form to be filled out
-    #already have @post at this point
-    #you need a package object for the model backed form in 'posts/show'
+    #already have @resident at this point
+    #you need a package object for the model backed form in 'residents/show'
     @package = Package.new # package object 
-    #render 'posts/show' (show.html.erb) automatically called before exiting this method
-    #the form in 'posts/show' will submit info to path:
-    #posts/id/package which maps to packages#create
+    #render 'residents/show' (show.html.erb) automatically called before exiting this method
+    #the form in 'residents/show' will submit info to path:
+    #residents/id/package which maps to packages#create
     #so a packages_controller is needed to create a package via "def create"    
   end
 
@@ -26,12 +26,12 @@ class ResidentsController < ApplicationController
     @resident = Resident.new 
   end
 
-  # POST '/residents'
+  # resident '/residents'
   #the general pattern used in the action create that handles
   #submission of model-backed forms -- where you go after new
   def create 
     # the form displayed in "new.html.erb" is submitted to '/residents' 
-    # using verb method="POST" which is routed to residents#create.
+    # using verb method="resident" which is routed to residents#create.
     # @resident, is populated with values submitted from the form
     @resident = Resident.new(resident_params) 
     @resident.apartment_id = 
@@ -49,7 +49,7 @@ class ResidentsController < ApplicationController
 
   # GET '/residents/id/edit'
   def edit #url will be something like /resident/3/edit, edit form will be rendered
-    #@resident = Resident.find(params[:id])  # ... this is now done by set_user
+    #@resident = Resident.find(params[:id])  # ... this is now done by set_resident
     #edit.html... rendered by default
   end
 
@@ -80,6 +80,6 @@ class ResidentsController < ApplicationController
   def set_resident
     # ask ActiveRecord to find the resident object in the db using the id from params
     @resident = Resident.find(params[:id]) #looking at the model layer
-    #@post = Post.find_by(slug: params[:id])
+    #@resident = resident.find_by(slug: params[:id])
  end
 end
