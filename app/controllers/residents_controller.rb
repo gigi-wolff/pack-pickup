@@ -34,8 +34,11 @@ class ResidentsController < ApplicationController
     # using verb method="resident" which is routed to residents#create.
     # @resident, is populated with values submitted from the form
     @resident = Resident.new(resident_params) 
-    @resident.apartment_id = 
+    #check for valid apartment number 
+    if valid_apartment?(resident_params[:apartment_number])  
+     @resident.apartment_id = 
       Apartment.find_by(apartment_number: resident_params[:apartment_number]).id
+    end
     if @resident.save #@resident.save returns "false" if can't save
       flash[:notice] = "Resident was added"
       #redirect must be a url
@@ -82,4 +85,9 @@ class ResidentsController < ApplicationController
     @resident = Resident.find(params[:id]) #looking at the model layer
     #@resident = resident.find_by(slug: params[:id])
  end
+
+  def valid_apartment?(apt)
+    apartments=["1A", "1B", "1C", "2A", "2B", "2C"]
+    apartments.include?(apt)
+  end
 end

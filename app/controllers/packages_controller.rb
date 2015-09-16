@@ -28,14 +28,15 @@ class PackagesController < ApplicationController
   end
 
   # resident '/residents/:resident_id/packages'
+  # coming in from /residents/show.html.erb
   def create 
     @resident = Resident.find_by(id: params[:resident_id])
     @package = Package.new(package_params)
     @package.resident = @resident #associate package with the particular resident
     @package.apartment_id = 
-      Apartment.find_by(apartment_number: @resident.apartment_number).id
+    Apartment.find_by(apartment_number: @resident.apartment_number).id
     #@package.apartment_id = @resident.apartment_id #associate package with the particular apartment
-     
+    binding.pry
     if @package.save
       flash[:notice] = "Your package was added"
       redirect_to residents_path(@resident) #redirect must be a url

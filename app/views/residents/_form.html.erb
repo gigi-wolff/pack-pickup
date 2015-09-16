@@ -1,35 +1,38 @@
 <%= render 'shared/errors', obj: @resident %>
 
-<form role="form">
 <div class = 'well'>
   <%= form_for @resident do |f| %>
-    <div class = 'form-group'>
+    <div class = 'control-group'>
       <%= f.label :apartment_number %>
-      <br/> 
+      <br/>
       <%= f.text_area :apartment_number, rows: 1%>
     </div>  
-    <div class = 'form-group'>
+
+    <div class = 'control-group'>
       <%= f.label :first_name %>
       <br/> 
       <%= f.text_area :first_name, rows: 1%>
-    </div>  
-    <div class = 'form-group'>
+    </div> 
+ 
+    <div class = 'control-group'>
       <%= f.label :last_name %>
-      <br/> 
+      <br/>
       <%= f.text_field :last_name %>
     </div>
-    <div class = 'form-group'>
+
+    <div class = 'control-group'>
       <%= f.label :phone_personal %>
-      <br/> 
+      <br/>
       <%= f.text_field :phone_personal%>
     </div>
-    <div class = 'form-group'>
+
+    <div class = 'control-group'>
       <%= f.label :phone_work %>
-      <br/> 
+      <br/>
       <%= f.text_field :phone_work%>
     </div>
-    <br/>  
+    <br/>
+
     <%= f.submit(@resident.new_record? ? 'Add New Resident' : 'Update Resident', class:'btn btn-primary')%>
   <% end %>
 </div>
-</form>
