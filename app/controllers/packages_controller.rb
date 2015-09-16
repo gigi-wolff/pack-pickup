@@ -36,7 +36,6 @@ class PackagesController < ApplicationController
     @package.apartment_id = 
     Apartment.find_by(apartment_number: @resident.apartment_number).id
     #@package.apartment_id = @resident.apartment_id #associate package with the particular apartment
-    binding.pry
     if @package.save
       flash[:notice] = "Your package was added"
       redirect_to residents_path(@resident) #redirect must be a url

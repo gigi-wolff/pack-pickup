@@ -1,18 +1,4 @@
 <h3> Add a package: </h3>
-  <%= form_for [@resident, @package] do |f| %>
-    <%= render 'shared/errors', obj: @package %>
-    <div class = 'control-group'>
-      <%= f.label :arrived %>
-      <br/>
-      <%= f.text_field :arrived %>
-    </div>
-    <div class = 'control-group'>
-      <%= f.label :picked_up %>
-      <br/>
-      <%= f.text_field :picked_up%>
-    </div>
-    <br/>
-    <%= f.submit(@package.new_record? ? 'Add New Package' : 'Update Package', class:'btn btn-primary')%>
-  <% end %>
 
-  <%= render 'packages/packages', obj: @resident %>
+<%= render 'packages/form', obj: @resident, obj: @package %>
+<%= render 'packages/packages', obj: @resident %>
