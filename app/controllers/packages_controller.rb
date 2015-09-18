@@ -19,9 +19,9 @@ class PackagesController < ApplicationController
   #the general pattern used in the action create that handles
   #submission of model-backed forms 
   def update # this is where the form displayed in 'edit' is submitted using verb "patch"
-    @resident.decrement_package_count
-    @resident.save
-    if @package.update(package_params)
+    #if @package.update(package_params)
+      @resident.decrement_package_count
+      @resident.save
       flash[:notice] = "Package information updated"
       # send to show resident_path (add _path to the prefix)
       redirect_to resident_path(@resident)
@@ -36,9 +36,9 @@ class PackagesController < ApplicationController
     @package = Package.new(package_params)
     @package.resident = @resident #associate package with the particular resident
     @package.apartment_id = Apartment.find_by(apartment_number: @resident.apartment_number).id
-    @resident.increment_package_count
-    @resident.save
     if @package.save
+      @resident.increment_package_count
+      @resident.save
       flash[:notice] = "Your package was added"
       redirect_to residents_path(@resident) #redirect must be a url
     else

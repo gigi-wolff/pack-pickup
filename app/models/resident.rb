@@ -19,7 +19,6 @@ class Resident < ActiveRecord::Base
   end
 
   def decrement_package_count
-    binding.pry
     self.package_count = self.package_count.to_i - 1
   end
 
