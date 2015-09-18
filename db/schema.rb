@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911013149) do
+ActiveRecord::Schema.define(version: 20150917170616) do
 
   create_table "apartments", force: true do |t|
     t.string   "apartment_number"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150911013149) do
     t.string   "apartment_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "package_count"
   end
 
 end

@@ -1,5 +1,6 @@
 class PackagesController < ApplicationController
   before_action :set_package, only: [:edit, :update, :show]
+  before_action :set_resident, only: [:edit, :create, :update, :show]
   before_action :package_params, only: [:create]
 
   #GET /residents/:resident_id/packages/:id
@@ -9,7 +10,7 @@ class PackagesController < ApplicationController
 
    # GET /residents/resident_id/packages/package_id/edit
   def edit 
-    @resident = Resident.find(params[:resident_id])
+    #@resident = Resident.find(params[:resident_id])
     #@package = Package.find(params[:id])
     #edit.html... rendered by default
   end
@@ -18,6 +19,8 @@ class PackagesController < ApplicationController
   #the general pattern used in the action create that handles
   #submission of model-backed forms 
   def update # this is where the form displayed in 'edit' is submitted using verb "patch"
+    @resident.decrement_package_count
+    @resident.save
     if @package.update(package_params)
       flash[:notice] = "Package information updated"
       # send to show resident_path (add _path to the prefix)
@@ -30,12 +33,11 @@ class PackagesController < ApplicationController
   # resident '/residents/:resident_id/packages'
   # coming in from /residents/show.html.erb
   def create 
-    @resident = Resident.find_by(id: params[:resident_id])
     @package = Package.new(package_params)
     @package.resident = @resident #associate package with the particular resident
-    @package.apartment_id = 
-    Apartment.find_by(apartment_number: @resident.apartment_number).id
-    #@package.apartment_id = @resident.apartment_id #associate package with the particular apartment
+    @package.apartment_id = Apartment.find_by(apartment_number: @resident.apartment_number).id
+    @resident.increment_package_count
+    @resident.save
     if @package.save
       flash[:notice] = "Your package was added"
       redirect_to residents_path(@resident) #redirect must be a url
@@ -60,6 +62,13 @@ class PackagesController < ApplicationController
   def set_package
     # ask ActiveRecord to find the package object in the db using the id from params
     @package = Package.find(params[:id]) #looking at the model layer
+    #@resident = resident.find_by(slug: params[:id])
+  end
+
+  def set_resident
+    # ask ActiveRecord to find the package object in the db using the id from params
+    #@resident = Package.find_by(resident_id: params[:resident_id])
+    @resident = Resident.find(params[:resident_id])
     #@resident = resident.find_by(slug: params[:id])
   end
 

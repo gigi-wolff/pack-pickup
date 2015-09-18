@@ -1,5 +1,5 @@
 class ResidentsController < ApplicationController
-  before_action :set_resident, only: [:show, :edit, :update]
+  before_action :set_resident, only: [:show, :edit, :update, :destroy]
   
   # GET '/'
   def index    
@@ -27,17 +27,19 @@ class ResidentsController < ApplicationController
   end
 
   # resident '/residents'
-  #the general pattern used in the action create that handles
-  #submission of model-backed forms -- where you go after new
+  # where you go after new:
+  # the form displayed in "new.html.erb" is submitted to '/residents' 
+  # using verb method="resident" which is routed to residents#create.
+  # @resident, is populated with values submitted from the form
   def create 
     # the form displayed in "new.html.erb" is submitted to '/residents' 
     # using verb method="resident" which is routed to residents#create.
     # @resident, is populated with values submitted from the form
     @resident = Resident.new(resident_params) 
-    #check for valid apartment number 
-    if valid_apartment?(resident_params[:apartment_number])  
-     @resident.apartment_id = 
-      Apartment.find_by(apartment_number: resident_params[:apartment_number]).id
+    #if apartment number valid then find and save apartment_id
+    if Apartment.find_by(apartment_number: resident_params[:apartment_number]) != nil then   
+      @resident.apartment_id = 
+        Apartment.find_by(apartment_number: resident_params[:apartment_number]).id
     end
     if @resident.save #@resident.save returns "false" if can't save
       flash[:notice] = "Resident was added"
@@ -69,6 +71,14 @@ class ResidentsController < ApplicationController
     end
   end
 
+  # DELETE /residents/:id
+  def destroy 
+    #binding.pry
+    @resident.destroy
+    flash[:success] = "Resident Deleted"
+    redirect_to residents_path
+  end
+
   private
 
   def resident_params
@@ -86,8 +96,4 @@ class ResidentsController < ApplicationController
     #@resident = resident.find_by(slug: params[:id])
  end
 
-  def valid_apartment?(apt)
-    apartments=["1A", "1B", "1C", "2A", "2B", "2C"]
-    apartments.include?(apt)
-  end
 end

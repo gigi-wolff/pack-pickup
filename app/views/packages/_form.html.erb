@@ -4,12 +4,12 @@
     <div class = 'control-group'>
       <%= f.label :arrived %>
       <br/>
-      <%= f.text_field :arrived %>
+      <%= f.date_field :arrived, min: Date.today %>
     </div>
     <div class = 'control-group'>
       <%= f.label :picked_up %>
       <br/>
-      <%= f.text_field :picked_up%>
+      <%= f.date_field :picked_up, min: Date.today %>
     </div>
     <br/>
     <%= f.submit(@package.new_record? ? 'Add New Package' : 'Update Package', class:'btn btn-primary')%>

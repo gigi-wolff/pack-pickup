@@ -20,7 +20,7 @@
       <div class = 'control-group'>
       <%= f.label :date_available %>
       <br/>
-      <%= f.text_field :date_available%>
+      <%= f.date_field :date_available%>
     </div>
     <br/>  
     <%= f.submit(@apartment.new_record? ? 'Create Apartment' : 'Update Apartment', class:'btn btn-primary')%>

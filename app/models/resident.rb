@@ -1,5 +1,5 @@
 class Resident < ActiveRecord::Base
-  belongs_to :apartment 
+  belongs_to :apartment #can call a Resident method on any Apartment object
   has_many :packages
 
   validates :apartment_number, inclusion: {in: %w(1A 1B 1C 2A 2B 2C),
@@ -14,4 +14,13 @@ class Resident < ActiveRecord::Base
     :numericality => {:only_integer => true, message: "enter numbers only: 1234567890"}, 
     length: {is: 10, message: "is the wrong length (should be 10 digits)"}
  
+  def increment_package_count
+    self.package_count = self.package_count.to_i + 1
+  end
+
+  def decrement_package_count
+    binding.pry
+    self.package_count = self.package_count.to_i - 1
+  end
+
 end
