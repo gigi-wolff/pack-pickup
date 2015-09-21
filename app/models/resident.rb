@@ -1,6 +1,7 @@
 class Resident < ActiveRecord::Base
   belongs_to :apartment #can call a Resident method on any Apartment object
-  has_many :packages
+  #dependent: :destroy, rails will destroy all packages associated with resident
+  has_many :packages, dependent: :destroy 
 
   validates :apartment_number, inclusion: {in: %w(1A 1B 1C 2A 2B 2C),
     message: "invalid"}

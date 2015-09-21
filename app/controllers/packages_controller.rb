@@ -19,7 +19,7 @@ class PackagesController < ApplicationController
   #the general pattern used in the action create that handles
   #submission of model-backed forms 
   def update # this is where the form displayed in 'edit' is submitted using verb "patch"
-    #if @package.update(package_params)
+    if @package.update(package_params)
       @resident.decrement_package_count
       @resident.save
       flash[:notice] = "Package information updated"
