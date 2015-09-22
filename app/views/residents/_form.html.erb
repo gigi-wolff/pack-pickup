@@ -33,6 +33,20 @@
     </div>
     <br/>
 
+    <div class = 'control-group'>
+      <%= f.label :username %>
+      <br/>
+      <%= f.text_field :username%>
+    </div>
+    <br/>
+
+    <div class = 'control-group'>
+      <%= f.label :password %>
+      <br/>
+      <%= f.text_field :password%>
+    </div>
+    <br/>
+
     <%= f.submit(@resident.new_record? ? 'Add New Resident' : 'Update Resident', class:'btn btn-primary')%>
 
   <% end %>

@@ -3,6 +3,10 @@ class Resident < ActiveRecord::Base
   #dependent: :destroy, rails will destroy all packages associated with resident
   has_many :packages, dependent: :destroy 
 
+  #add gem 'bcrypt-ruby', '=3.0.1' to gemfile to use has_secure_password method
+  #set validations to false to manage validations ourselves 
+  has_secure_password validations: false
+
   validates :apartment_number, inclusion: {in: %w(1A 1B 1C 2A 2B 2C),
     message: "invalid"}
   validates_presence_of :first_name, :last_name
@@ -23,4 +27,7 @@ class Resident < ActiveRecord::Base
     self.package_count = self.package_count.to_i - 1
   end
 
+  def admin?
+    self.role == 'admin'
+  end
 end

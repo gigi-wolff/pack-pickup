@@ -1,4 +1,5 @@
-<h3> Add a package: </h3>
-
-<%= render 'packages/form', obj: @resident, obj: @package %>
+<% if current_user.admin? %>
+  <h3> Add a package: </h3>
+  <%= render 'packages/form', obj: @resident, obj: @package %>
+<% end %>
 <%= render 'packages/packages', obj: @resident %>

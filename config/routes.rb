@@ -1,5 +1,12 @@
 PackPickup::Application.routes.draw do
-  root to: 'residents#index'
+  root to: 'sessions#new' 
+
+  #create a named route called register automatically
+  #CRUD is not applicable so resource is not an appropriate choice,
+  #instead manually build routes 
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
 
   resources :residents do   
     resources :packages

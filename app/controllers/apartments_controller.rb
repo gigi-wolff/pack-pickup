@@ -10,7 +10,7 @@ class ApartmentsController < ApplicationController
 
   # GET '/apartments/id/edit'
   def edit #url will be something like /apartment/3/edit, edit form will be rendered
-    #@apartment = Apartment.find(params[:id])  # ... this is now done by set_user
+    #@apartment = Apartment.find(params[:id]) #set_apartment does this
     #edit.html... rendered by default
   end
 
