@@ -15,7 +15,11 @@
       <% obj.packages.each do |p| %>
         <tr>
           <% if p.picked_up == nil then %>
-            <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
+            <% if current_user.admin? then %> 
+              <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
+            <% else %>
+              <td> <%= i %> </td>
+            <% end %>
             <td><%= display_date(p.arrived)%></td> 
             <td><%= display_date(p.picked_up)%></td>
             <% i+=1 %>

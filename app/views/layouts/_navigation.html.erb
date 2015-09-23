@@ -1,8 +1,4 @@
-<ul class="nav">
-  <li>
-    <%= link_to "Package Pick-Up", root_path, :class => 'brand' %>
-  </li>
-</ul>
+<h2> Package Pick-up </h2>
 
 <% if logged_in? %>
   <% if current_user.admin? %>
@@ -23,5 +19,20 @@
     <%= link_to 'logout', logout_path, class: 'btn btn-primary btn-large'
     %>
   </div> 
+
+  <div class='btn-group nav_item'>
+    <%= link_to('', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown') do %>
+      <%= current_user.first_name %>
+      <span class='caret'></span>
+  <% end %>
+    <ul class='dropdown-menu'>
+      <li>
+        <%= link_to edit_resident_path(current_user) do %>
+          <i class='icon-pencil'></i>
+          edit profile
+        <% end %>
+      </li>
+    </ul>
+  </div>
 <% end %>
 

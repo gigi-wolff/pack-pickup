@@ -44,7 +44,7 @@ class ResidentsController < ApplicationController
     if @resident.save #@resident.save returns "false" if can't save
       flash[:notice] = "Resident was added"
       #redirect must be a url
-      redirect_to residents_path #goes to index action    
+      redirect_to residents_path #goes to index action 
     else
     #validation error occured. We must render to have access to 
     #"resident.error.full_messages" array to display generated errors   
@@ -65,7 +65,11 @@ class ResidentsController < ApplicationController
     if @resident.update(resident_params)
       flash[:notice] = "resident information updated"
       # send to show resident_path (add _path to the prefix)
-      redirect_to residents_path(@resident)
+      if @resident.admin? then
+        redirect_to residents_path #goes to index action 
+      else
+        redirect_to resident_path(@resident) #goes to show action 
+      end   
     else
       render :edit
     end
