@@ -19,7 +19,7 @@
               <%= link_to("#{r.package_count.to_i}", resident_path(r)) %> </td>
             <td><%= r.first_name%></td>
             <td><%= r.last_name%></td>
-            <td><%= r.phone_personal%></td>            
+            <td><%= r.phone_personal.to_s(:phone, area_code: true)%></td>            
           </tr>
         <% end %>   
     </tbody>
