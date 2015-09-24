@@ -1,5 +1,6 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, only: [:new, :create, :destroy]
   
   # GET '/'
   def index    
@@ -36,11 +37,6 @@ class ResidentsController < ApplicationController
     # using verb method="resident" which is routed to residents#create.
     # @resident, is populated with values submitted from the form
     @resident = Resident.new(resident_params) 
-    #if apartment number valid then find and save apartment_id
-    if Apartment.find_by(apartment_number: resident_params[:apartment_number]) != nil then   
-      @resident.apartment_id = 
-        Apartment.find_by(apartment_number: resident_params[:apartment_number]).id
-    end
     if @resident.save #@resident.save returns "false" if can't save
       flash[:notice] = "Resident was added"
       #redirect must be a url
@@ -77,7 +73,6 @@ class ResidentsController < ApplicationController
 
   # DELETE /residents/:id
   def destroy 
-    #binding.pry
     @resident.destroy
     flash[:success] = "Resident Deleted"
     redirect_to residents_path
@@ -99,5 +94,6 @@ class ResidentsController < ApplicationController
     @resident = Resident.find(params[:id]) #looking at the model layer
     #@resident = resident.find_by(slug: params[:id])
  end
+
 
 end

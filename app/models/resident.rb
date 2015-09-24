@@ -9,6 +9,7 @@ class Resident < ActiveRecord::Base
 
   validates :apartment_number, inclusion: {in: %w(1A 1B 1C 2A 2B 2C),
     message: "invalid"}
+
   validates_presence_of :first_name, :last_name
 
   validates :phone_personal,
@@ -18,13 +19,11 @@ class Resident < ActiveRecord::Base
   validates :phone_work, 
     :numericality => {:only_integer => true, message: "enter numbers only: 1234567890"}, 
     length: {is: 10, message: "is the wrong length (should be 10 digits)"}
- 
-  def increment_package_count
-    self.package_count = self.package_count.to_i + 1
-  end
 
-  def decrement_package_count
-    self.package_count = self.package_count.to_i - 1
+  after_validation :set_apartment_id, on: :create
+
+  def set_apartment_id
+    self.apartment_id = Apartment.find_by(apartment_number: self.apartment_number).id
   end
 
   def admin?

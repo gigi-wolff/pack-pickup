@@ -2,6 +2,10 @@ class PackagesController < ApplicationController
   before_action :set_package, only: [:edit, :update, :show]
   before_action :set_resident, only: [:edit, :create, :update, :show]
   before_action :package_params, only: [:create]
+  before_action :require_admin, except: [:show]
+  after_action :decrement_package_count, only: [:update]
+  after_action :increment_package_count, only: [:create]
+
 
   #GET /residents/:resident_id/packages/:id
   def show 
@@ -20,8 +24,6 @@ class PackagesController < ApplicationController
   #submission of model-backed forms 
   def update # this is where the form displayed in 'edit' is submitted using verb "patch"
     if @package.update(package_params)
-      @resident.decrement_package_count
-      @resident.save
       flash[:notice] = "Package information updated"
       # send to show resident_path (add _path to the prefix)
       redirect_to resident_path(@resident)
@@ -37,8 +39,6 @@ class PackagesController < ApplicationController
     @package.resident = @resident #associate package with the particular resident
     @package.apartment_id = Apartment.find_by(apartment_number: @resident.apartment_number).id
     if @package.save
-      @resident.increment_package_count
-      @resident.save
       flash[:notice] = "Your package was added"
       redirect_to residents_path(@resident) #redirect must be a url
     else
@@ -70,6 +70,16 @@ class PackagesController < ApplicationController
     #@resident = Package.find_by(resident_id: params[:resident_id])
     @resident = Resident.find(params[:resident_id])
     #@resident = resident.find_by(slug: params[:id])
+  end
+
+  def increment_package_count
+    @resident.package_count = @resident.package_count.to_i + 1
+    @resident.save
+  end
+
+  def decrement_package_count
+    @resident.package_count = @resident.package_count.to_i - 1
+    @resident.save
   end
 
 end
