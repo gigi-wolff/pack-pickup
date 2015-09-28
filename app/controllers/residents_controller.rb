@@ -1,18 +1,23 @@
 class ResidentsController < ApplicationController
+  before_action :require_admin, except: [:edit, :update, :show]
+  before_action :require_user
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, only: [:new, :create, :destroy]
+  before_action :require_current_user, only: [:edit, :update, :show]
+
   
   # GET '/'
-  def index    
+  def index  
     @residents = Resident.all
-    render 'residents/index' #happens by default and end of each method
+    #render 'residents/index' #happens by default and end of each method
   end
 
   # GET '/residents/id'
   def show   # Here we display the form to be filled out
     #already have @resident at this point
     #you need a package object for the model backed form in 'residents/show'
-    @package = Package.new # package object 
+    if current_user.admin? then 
+      @package = Package.new # package object 
+    end
     #render 'residents/show' (show.html.erb) automatically called before exiting this method
     #the form in 'residents/show' will submit info to path:
     #residents/id/package which maps to packages#create
@@ -61,7 +66,7 @@ class ResidentsController < ApplicationController
     if @resident.update(resident_params)
       flash[:notice] = "resident information updated"
       # send to show resident_path (add _path to the prefix)
-      if @resident.admin? then
+      if @current_user.admin? then
         redirect_to residents_path #goes to index action 
       else
         redirect_to resident_path(@resident) #goes to show action 
@@ -95,5 +100,9 @@ class ResidentsController < ApplicationController
     #@resident = resident.find_by(slug: params[:id])
  end
 
+  def require_current_user
+    access_denied unless 
+      logged_in? and (current_user == @resident || current_user.admin?)
+  end
 
 end

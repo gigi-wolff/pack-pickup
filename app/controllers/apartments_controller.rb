@@ -1,4 +1,5 @@
 class ApartmentsController < ApplicationController
+  before_action :require_admin
   before_action :set_apartment, only: [:edit, :update]
   
   # GET '/'

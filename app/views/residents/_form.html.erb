@@ -2,24 +2,37 @@
 
 <div class = 'well'>
   <%= form_for @resident do |f| %>
+  <fieldset>
+    <legend>Personal information:</legend>
     <div class = 'control-group'>
-      <%= f.label :apartment_number %>
-      <br/>
-      <%= f.text_area :apartment_number, rows: 1%>
+      <%= f.label :apartment_number %> <br>
+      <%if current_user.admin? %>
+        <%= f.text_field :apartment_number %>
+      <% else %>
+        <%= f.text_field :apartment_number, readonly: true %>
+      <% end %>
     </div>  
 
     <div class = 'control-group'>
       <%= f.label :first_name %>
-      <br/> 
-      <%= f.text_area :first_name, rows: 1%>
-    </div> 
+      <br/>
+      <%if current_user.admin? %>
+        <%= f.text_field :first_name %>
+      <% else %>
+        <%= f.text_field :first_name, readonly: true %>
+      <% end %>
+    </div>
  
     <div class = 'control-group'>
       <%= f.label :last_name %>
       <br/>
-      <%= f.text_field :last_name %>
+      <%if current_user.admin? %>
+        <%= f.text_field :last_name %>
+      <% else %>
+        <%= f.text_field :last_name, readonly: true %>
+      <% end %>
     </div>
-
+  </fieldset>
     <div class = 'control-group'>
       <%= f.label :phone_personal %>
       <br/>

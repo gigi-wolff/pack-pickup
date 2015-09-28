@@ -30,6 +30,12 @@
           edit profile
         <% end %>
       </li>
+      <li>
+        <%= link_to resident_path(current_user) do %>
+          <i class='icon-home'></i>
+          show packages
+        <% end %>
+      </li>
     </ul>
   </div>
 <% end %>

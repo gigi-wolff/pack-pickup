@@ -1,14 +1,22 @@
-<div class = 'well'>
-  <%= form_tag'/login' do %>
-    <div class = 'control-group'>
-      <%= label_tag :username %> <br/>
-      <%= text_field_tag :username, params[:username] || '' %>
-    </div>
-    <div class = 'control-group'>
-      <%= label_tag :password %> <br/>
-      <%= password_field_tag :password, params[:password] || '' %> 
-    </div>
-    <br/>
-     <%= submit_tag 'Login', class:'btn btn-success'%>
-  <% end %>
-</div>
+<% if logged_in? %>
+  <h4>
+    <p class="text-center">
+    You are still logged in.
+    </p>
+  </h4>
+<% else %>
+  <div class = 'well'>
+    <%= form_tag'/login' do %>
+      <div class = 'control-group'>
+        <%= label_tag :username %> <br/>
+        <%= text_field_tag :username, params[:username] || '' %>
+      </div>
+      <div class = 'control-group'>
+        <%= label_tag :password %> <br/>
+        <%= password_field_tag :password, params[:password] || '' %> 
+      </div>
+      <br/>
+       <%= submit_tag 'Login', class:'btn btn-success'%>
+    <% end %>
+  </div>
+<% end %>

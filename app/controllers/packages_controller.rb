@@ -1,4 +1,5 @@
 class PackagesController < ApplicationController
+  before_action :require_user
   before_action :set_package, only: [:edit, :update, :show]
   before_action :set_resident, only: [:edit, :create, :update, :show]
   before_action :package_params, only: [:create]
