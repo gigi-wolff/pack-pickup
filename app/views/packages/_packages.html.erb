@@ -1,35 +1,35 @@
 <!-- obj = @ resident -->
 <h2><center>Packages for: <%= obj.first_name %> <%= obj.last_name %></center></h2>
 <div class="container">
-  <table class="table table-striped">
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th>Edit Package</th>
         <th>Arrived On</th>
-        <th>Picked Up</th>
+        <th>Picked Up</th>      
       </tr>
     </thead>
     <tbody>
       <!-- list packages that have not been picked up first -->
       <% i=1 %> 
       <% obj.packages.each do |p| %>
-        <tr>
+        <tr class = "warning">
           <% if p.picked_up == nil then %>
             <% if current_user.admin? then %> 
               <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
             <% else %>
-              <td> <%= i %> </td>
-            <% end %>
+              <td><%= i %></td>
+            <% end %>         
             <td><%= display_date(p.arrived)%></td> 
             <td><%= display_date(p.picked_up)%></td>
             <% i+=1 %>
           <% end %>
         </tr>          
       <% end %>
-      <!-- list packages that have not been picked up first -->
+      <!-- list packages that have been picked up -->
       <% obj.packages.each do |p| %>
-        <% if p.picked_up != nil then %>
-          <tr>
+        <tr class = "success">
+          <% if p.picked_up != nil then %>
             <td><%= i %></td> 
             <td><%= display_date(p.arrived)%></td> 
             <td><%= display_date(p.picked_up)%></td> 
