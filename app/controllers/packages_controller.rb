@@ -1,7 +1,7 @@
 class PackagesController < ApplicationController
   before_action :require_user
-  before_action :set_package, only: [:edit, :update, :show]
-  before_action :set_resident, only: [:edit, :create, :update, :show]
+  before_action :set_package, only: [:edit, :update, :show, :destroy]
+  before_action :set_resident
   before_action :package_params, only: [:create]
   before_action :require_admin, except: [:show]
   after_action :decrement_package_count, only: [:update]
@@ -40,8 +40,8 @@ class PackagesController < ApplicationController
     @package.resident = @resident #associate package with the particular resident
     @package.apartment_id = Apartment.find_by(apartment_number: @resident.apartment_number).id
     if @package.save
-      flash[:notice] = "Your package was added"
-      redirect_to residents_path(@resident) #redirect must be a url
+      flash[:notice] = "Package was added"
+      redirect_to edit_resident_package_path(@resident,@package)
     else
       #package was submitted from 'residents/show', so this is where
       #you go back to display errors. This template needs 
@@ -49,6 +49,15 @@ class PackagesController < ApplicationController
       render 'residents/show' # render must be a template file
     end
   end
+
+  # DELETE /packages/:id
+  def destroy
+  binding.pry 
+    @package.destroy
+    flash[:success] = "Packaged Deleted"
+    redirect_to resident_path(@resident)
+  end
+
 
   private
 
@@ -63,7 +72,6 @@ class PackagesController < ApplicationController
   def set_package
     # ask ActiveRecord to find the package object in the db using the id from params
     @package = Package.find(params[:id]) #looking at the model layer
-    #@resident = resident.find_by(slug: params[:id])
   end
 
   def set_resident

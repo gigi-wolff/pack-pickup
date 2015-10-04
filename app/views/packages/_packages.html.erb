@@ -4,38 +4,30 @@
   <table class="table table-bordered">
     <thead>
       <tr>
+        <th>Delete Package</th>
         <th>Edit Package</th>
         <th>Arrived On</th>
         <th>Picked Up</th>      
       </tr>
     </thead>
     <tbody>
-      <!-- list packages that have not been picked up first -->
       <% i=1 %> 
       <% obj.packages.each do |p| %>
-        <tr class = "warning">
           <% if p.picked_up == nil then %>
-            <% if current_user.admin? then %> 
-              <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
-            <% else %>
-              <td><%= i %></td>
-            <% end %>         
-            <td><%= display_date(p.arrived)%></td> 
-            <td><%= display_date(p.picked_up)%></td>
-            <% i+=1 %>
+            <tr class = "warning">
+          <% else %>
+            <tr class = "success">
           <% end %>
-        </tr>          
-      <% end %>
-      <!-- list packages that have been picked up -->
-      <% obj.packages.each do |p| %>
-        <tr class = "success">
-          <% if p.picked_up != nil then %>
-            <td><%= i %></td> 
-            <td><%= display_date(p.arrived)%></td> 
-            <td><%= display_date(p.picked_up)%></td> 
-            <% i+=1 %>
-        <% end %>
-        </tr>
+          <% if current_user.admin? then %> 
+            <td><%= link_to("(delete)", resident_package_path(obj,p), method: :delete, data: { confirm: "You sure?" }) %> </td>
+            <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
+          <% else %>
+            <td><%= i %></td>
+          <% end %>         
+          <td><%= display_date(p.arrived)%></td> 
+          <td><%= display_date(p.picked_up)%></td>
+          </tr>             
+          <% i +=1 %>
       <% end %>  
     </tbody>
   </table>

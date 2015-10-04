@@ -64,7 +64,7 @@ class ResidentsController < ApplicationController
   #submission of model-backed forms 
   def update # this is where the form displayed in 'edit' is submitted using verb "patch"
     if @resident.update(resident_params)
-      flash[:notice] = "resident information updated"
+      flash[:notice] = "Resident information updated"
       # send to show resident_path (add _path to the prefix)
       if @current_user.admin? then
         redirect_to residents_path #goes to index action 

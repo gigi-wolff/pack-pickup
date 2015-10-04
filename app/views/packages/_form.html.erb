@@ -5,19 +5,20 @@
       <div class = 'control-group'>
         <%= f.label :arrived %>
         <br/>
-        <%= f.date_field :arrived, min: Date.today %>
+        <%= f.datetime_local_field :arrived, min: DateTime %>
       </div>
     <% else %>
        <div class = 'control-group'>
         <%= f.label :arrived %>
         <br/>
-        <%= f.date_field :arrived, readonly: true %>
+        <%= f.datetime_local_field :arrived, readonly: true %>
       </div>
     <% end %>
     <div class = 'control-group'>
       <%= f.label :picked_up %>
       <br/>
-      <%= f.date_field :picked_up, min: Date.today%>
+      <%= f.datetime_local_field :picked_up, min: DateTime %>
+      <!-- <%= f.date_field :picked_up, min: Date.today%> -->
     </div>
     <br/>
     <%= f.submit(@package.new_record? ? 'Add New Package' : 'Update Package', class:'btn btn-primary')%>
