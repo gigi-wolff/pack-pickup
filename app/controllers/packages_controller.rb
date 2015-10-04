@@ -52,7 +52,6 @@ class PackagesController < ApplicationController
 
   # DELETE /packages/:id
   def destroy
-  binding.pry 
     @package.destroy
     flash[:success] = "Packaged Deleted"
     redirect_to resident_path(@resident)
@@ -87,8 +86,10 @@ class PackagesController < ApplicationController
   end
 
   def decrement_package_count
-    @resident.package_count = @resident.package_count.to_i - 1
-    @resident.save
+    if @package.picked_up 
+      @resident.package_count = @resident.package_count.to_i - 1
+      @resident.save
+    end
   end
 
 end

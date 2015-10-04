@@ -4,30 +4,40 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Delete Package</th>
-        <th>Edit Package</th>
+        <% if current_user.admin? then %> 
+          <th>Edit Package</th>
+        <% else %>
+          <th>Open Deliveries</th>
+        <% end %>
         <th>Arrived On</th>
         <th>Picked Up</th>      
       </tr>
     </thead>
     <tbody>
-      <% i=1 %> 
+      <% i=0 %> 
       <% obj.packages.each do |p| %>
-          <% if p.picked_up == nil then %>
-            <tr class = "warning">
-          <% else %>
+          <% if p.picked_up then %>
             <tr class = "success">
+          <% else %>
+            <tr class = "warning">
+            <% i +=1 %>
           <% end %>
           <% if current_user.admin? then %> 
-            <td><%= link_to("(delete)", resident_package_path(obj,p), method: :delete, data: { confirm: "You sure?" }) %> </td>
-            <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
+             <% if p.picked_up %> 
+              <td><%= link_to("(delete)", resident_package_path(obj,p), method: :delete, data: { confirm: "You sure?" }) %> </td>
+            <% else %>
+              <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
+            <% end %>
           <% else %>
-            <td><%= i %></td>
+            <% if p.picked_up %> 
+              <td>Closed</td>
+            <% else %>
+              <td><%= i %></td>
+            <% end %>
           <% end %>         
           <td><%= display_date(p.arrived)%></td> 
           <td><%= display_date(p.picked_up)%></td>
           </tr>             
-          <% i +=1 %>
       <% end %>  
     </tbody>
   </table>
