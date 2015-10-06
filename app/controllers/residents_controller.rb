@@ -12,16 +12,7 @@ class ResidentsController < ApplicationController
   end
 
   # GET '/residents/id'
-  def show   # Here we display the form to be filled out
-    #already have @resident at this point
-    #you need a package object for the model backed form in 'residents/show'
-    if current_user.admin? then 
-      @package = Package.new # package object 
-    end
-    #render 'residents/show' (show.html.erb) automatically called before exiting this method
-    #the form in 'residents/show' will submit info to path:
-    #residents/id/package which maps to packages#create
-    #so a packages_controller is needed to create a package via "def create"    
+  def show 
   end
 
   # GET '/residents/new'

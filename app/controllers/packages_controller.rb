@@ -13,6 +13,8 @@ class PackagesController < ApplicationController
     #show.html... rendered by default
   end
 
+
+
    # GET /residents/resident_id/packages/package_id/edit
   def edit 
     #@resident = Resident.find(params[:resident_id])
@@ -33,20 +35,20 @@ class PackagesController < ApplicationController
     end
   end
 
-  # resident '/residents/:resident_id/packages'
-  # coming in from /residents/show.html.erb
+  def new 
+    if current_user.admin? then 
+      @package = Package.new # package object 
+    end
+  end
+
   def create 
     @package = Package.new(package_params)
     @package.resident = @resident #associate package with the particular resident
-    @package.apartment_id = Apartment.find_by(apartment_number: @resident.apartment_number).id
     if @package.save
       flash[:notice] = "Package was added"
-      redirect_to edit_resident_package_path(@resident,@package)
+      redirect_to resident_path(@resident)
     else
-      #package was submitted from 'residents/show', so this is where
-      #you go back to display errors. This template needs 
-      #@resident and @package to be set up in order to work.
-      render 'residents/show' # render must be a template file
+      render 'residents/show' 
     end
   end
 

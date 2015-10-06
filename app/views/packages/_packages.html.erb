@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% i=0 %> 
+      <% i = 0 %>
       <% obj.packages.each do |p| %>
           <% if p.picked_up then %>
             <tr class = "success">
@@ -24,9 +24,12 @@
           <% end %>
           <% if current_user.admin? then %> 
              <% if p.picked_up %> 
-              <td><%= link_to("(delete)", resident_package_path(obj,p), method: :delete, data: { confirm: "You sure?" }) %> </td>
+              <td>
+                <%= link_to("(Delete)", resident_package_path(obj,p), 
+                method: :delete, data: { confirm: "You sure?"}) %> 
+              </td>
             <% else %>
-              <td> <%= link_to(i, edit_resident_package_path(obj,p)) %> </td>
+              <td> <%= link_to("(Update)", edit_resident_package_path(obj,p)) %> </td>
             <% end %>
           <% else %>
             <% if p.picked_up %> 
