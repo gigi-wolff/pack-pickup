@@ -16,7 +16,7 @@
             <td> <%= link_to(a.apartment_number, edit_apartment_path(a)) %> </td>
             <td><%= a.description%></td>
             <td><%= a.rent.to_s(:currency)%></td>
-            <td><%= display_date(a.date_available)%></td>
+            <td><%= display_date(a.date_available) %></td>
           </tr>
         <% end %>   
     </tbody>

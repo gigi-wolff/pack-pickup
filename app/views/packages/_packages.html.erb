@@ -5,9 +5,9 @@
     <thead>
       <tr>
         <% if current_user.admin? then %> 
-          <th>Edit Package</th>
+          <th>Package</th>
         <% else %>
-          <th>Open Deliveries</th>
+          <th>Deliveries</th>
         <% end %>
         <th>Arrived On</th>
         <th>Picked Up</th>      
@@ -23,24 +23,36 @@
             <% i +=1 %>
           <% end %>
           <% if current_user.admin? then %> 
-             <% if p.picked_up %> 
+            <% if p.picked_up %> 
               <td>
                 <%= link_to("(Delete)", resident_package_path(obj,p), 
                 method: :delete, data: { confirm: "You sure?"}) %> 
               </td>
-            <% else %>
-              <td> <%= link_to("(Update)", edit_resident_package_path(obj,p)) %> </td>
-            <% end %>
-          <% else %>
+              <td><%= display_date(p.arrived)%></td>
+              <td ><%= display_date(p.picked_up)%></td>
+            <%else%>
+              <td id="package_state">Open</td>
+              <td><%= display_date(p.arrived)%></td>
+              <td>
+                <%= form_for [obj, p], method:'patch', remote:true do |f| %>
+                <%= render 'shared/errors', obj: p %>
+                <div class = 'control-group'>
+                  <%= f.datetime_local_field :picked_up, min: DateTime,:required => true %>
+                  <%= f.submit('Update', class:'btn btn-success', id:'update_button')%>
+                </div>
+                <% end %>
+              </td>
+            <%end%>
+          <%else%>
             <% if p.picked_up %> 
               <td>Closed</td>
             <% else %>
               <td><%= i %></td>
-            <% end %>
-          <% end %>         
-          <td><%= display_date(p.arrived)%></td> 
-          <td><%= display_date(p.picked_up)%></td>
-          </tr>             
+            <% end %>   
+            <td><%= display_date(p.arrived)%></td>
+            <td ><%= display_date(p.picked_up)%></td>
+          <%end%>        
+          </tr> 
       <% end %>  
     </tbody>
   </table>

@@ -13,25 +13,30 @@ class PackagesController < ApplicationController
     #show.html... rendered by default
   end
 
-
-
-   # GET /residents/resident_id/packages/package_id/edit
+  # GET /residents/resident_id/packages/package_id/edit
+  # @resident and @package are set already
   def edit 
-    #@resident = Resident.find(params[:resident_id])
-    #@package = Package.find(params[:id])
-    #edit.html... rendered by default
   end
 
   # PATCH /residents/:resident_id/packages/:id
   #the general pattern used in the action create that handles
   #submission of model-backed forms 
   def update # this is where the form displayed in 'edit' is submitted using verb "patch"
-    if @package.update(package_params)
-      flash[:notice] = "Package information updated"
-      # send to show resident_path (add _path to the prefix)
-      redirect_to resident_path(@resident)
-    else
-      render :edit
+    respond_to do |format|
+      if @package.update(package_params)
+        format.html do # html request
+          flash[:notice] = "Package information updated"
+          # send to show resident_path (add _path to the prefix)
+          redirect_to resident_path(@resident)
+        end
+        format.js do #ajax request
+          #render a update.js, which will have access to instance variables
+          # from update method, by default
+          format.js
+        end
+      else
+        render 'residents/show' 
+      end
     end
   end
 
@@ -83,8 +88,10 @@ class PackagesController < ApplicationController
   end
 
   def increment_package_count
-    @resident.package_count = @resident.package_count.to_i + 1
-    @resident.save
+    if @package.arrived 
+      @resident.package_count = @resident.package_count.to_i + 1
+      @resident.save
+    end
   end
 
   def decrement_package_count
