@@ -9,7 +9,11 @@ PackPickup::Application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   resources :residents do   
-    resources :packages
+    resources :packages do 
+      member do # will build 'POST /posts/id' part of route
+        post :new
+      end
+    end
   end
 
   resources :apartments, only: [:index, :edit, :update] 

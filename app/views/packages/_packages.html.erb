@@ -1,5 +1,8 @@
 <!-- obj = @ resident -->
 <h2><center>Packages for: <%= obj.first_name %> <%= obj.last_name %></center></h2>
+<center><%= link_to 'Add Package', new_resident_package_path(@resident), 
+  class: 'btn btn-primary btn-large' unless !current_user.admin? %></center>
+<br>
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -38,7 +41,7 @@
                 <%= render 'shared/errors', obj: p %>
                 <div class = 'control-group'>
                   <%= f.datetime_local_field :picked_up, min: DateTime,:required => true %>
-                  <%= f.submit('Update', class:'btn btn-success', id:'update_button')%>
+                  <%= f.submit('Update', class:'btn btn-link', id:'update_button')%>
                 </div>
                 <% end %>
               </td>
