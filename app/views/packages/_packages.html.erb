@@ -19,43 +19,43 @@
     <tbody>
       <% i = 0 %>
       <% obj.packages.each do |p| %>
-          <% if p.picked_up then %>
-            <tr class = "success">
-          <% else %>
-            <tr class = "warning">
-            <% i +=1 %>
-          <% end %>
-          <% if current_user.admin? then %> 
-            <% if p.picked_up %> 
-              <td>
+        <% if p.picked_up then %>
+          <tr class = "success">
+        <% else %>
+          <tr class = "warning">
+          <% i +=1 %>
+        <% end %>
+        <% if current_user.admin? then %> 
+          <% if p.picked_up %> 
+            <td>
                 <%= link_to("(Delete)", resident_package_path(obj,p), 
                 method: :delete, data: { confirm: "You sure?"}) %> 
-              </td>
-              <td><%= display_date(p.arrived)%></td>
-              <td ><%= display_date(p.picked_up)%></td>
-            <%else%>
-              <td id="package_state">Open</td>
-              <td><%= display_date(p.arrived)%></td>
-              <td>
-                <%= form_for [obj, p], method:'patch', remote:true do |f| %>
-                <%= render 'shared/errors', obj: p %>
-                <div class = 'control-group'>
-                  <%= f.datetime_local_field :picked_up, min: DateTime,:required => true %>
-                  <%= f.submit('Update', class:'btn btn-link', id:'update_button')%>
-                </div>
-                <% end %>
-              </td>
-            <%end%>
-          <%else%>
-            <% if p.picked_up %> 
-              <td>Closed</td>
-            <% else %>
-              <td><%= i %></td>
-            <% end %>   
+            </td>
             <td><%= display_date(p.arrived)%></td>
-            <td ><%= display_date(p.picked_up)%></td>
-          <%end%>        
-          </tr> 
+            <td><%= display_date(p.picked_up)%></td>
+          <%else%>
+            <td id="package_state">Open</td>
+            <td id="arrived"><%= display_date(p.arrived)%></td>
+            <td id="delivered">
+              <%= form_for [obj, p], method:'patch', remote:true do |f| %>
+              <%= render 'shared/errors', obj: p %>
+              <div class = 'control-group'>
+                <%= f.datetime_local_field :picked_up, min: DateTime,:required => true %>
+                  <%= f.submit('Update', class:'btn btn-link', id:'update_button')%>
+              </div>
+              <% end %>
+            </td>              
+          <%end%>
+        <%else%>
+          <% if p.picked_up %> 
+            <td>Closed</td>
+          <% else %>
+            <td><%= i %></td>
+          <% end %>   
+          <td ><%= display_date(p.arrived)%></td>
+          <td ><%= display_date(p.picked_up)%></td>
+        <%end%>        
+        </tr> 
       <% end %>  
     </tbody>
   </table>

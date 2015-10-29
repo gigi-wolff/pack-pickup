@@ -21,6 +21,7 @@ class Resident < ActiveRecord::Base
     length: {is: 10, message: "is the wrong length (should be 10 digits)"}
 
   after_validation :set_apartment_id, on: :create
+  before_save :generate_slug
 
   def set_apartment_id
     self.apartment_id = Apartment.find_by(apartment_number: self.apartment_number).id
@@ -28,5 +29,13 @@ class Resident < ActiveRecord::Base
 
   def admin?
     self.role == 'admin'
+  end
+
+  def generate_slug
+    self.slug = self.first_name + "-" + self.last_name + "-" +self.apartment_number
+  end
+
+  def to_param
+    self.slug
   end
 end

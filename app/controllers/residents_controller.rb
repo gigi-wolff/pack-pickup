@@ -87,8 +87,8 @@ class ResidentsController < ApplicationController
 
   def set_resident
     # ask ActiveRecord to find the resident object in the db using the id from params
-    @resident = Resident.find(params[:id]) #looking at the model layer
-    #@resident = resident.find_by(slug: params[:id])
+    #@resident = Resident.find(params[:id]) #looking at the model layer
+    @resident = Resident.find_by(slug: params[:id])
  end
 
   def require_current_user

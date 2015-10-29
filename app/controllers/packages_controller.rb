@@ -82,9 +82,8 @@ class PackagesController < ApplicationController
 
   def set_resident
     # ask ActiveRecord to find the package object in the db using the id from params
-    #@resident = Package.find_by(resident_id: params[:resident_id])
-    @resident = Resident.find(params[:resident_id])
-    #@resident = resident.find_by(slug: params[:id])
+    #@resident = Resident.find(params[:resident_id])
+    @resident = Resident.find_by(slug: params[:resident_id])
   end
 
   def increment_package_count
