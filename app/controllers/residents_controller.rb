@@ -1,10 +1,11 @@
 class ResidentsController < ApplicationController
-  before_action :require_admin, except: [:edit, :update, :show]
-  before_action :require_user
+  #before_action :require_admin, except: [:edit, :update, :show]
+  #before_action :require_user
+  #before_action :require_admin, only: [:index, :destroy]
+  #before_action :require_user, except: [:new, :create]
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
-  before_action :require_current_user, only: [:edit, :update, :show]
+  #before_action :require_current_user, only: [:edit, :update, :show]
 
-  
   # GET '/'
   def index  
     @residents = Resident.all
@@ -36,7 +37,8 @@ class ResidentsController < ApplicationController
     if @resident.save #@resident.save returns "false" if can't save
       flash[:notice] = "Resident was added"
       #redirect must be a url
-      redirect_to residents_path #goes to index action 
+      #redirect_to residents_path #goes to index action 
+      redirect_to login_path
     else
     #validation error occured. We must render to have access to 
     #"resident.error.full_messages" array to display generated errors   

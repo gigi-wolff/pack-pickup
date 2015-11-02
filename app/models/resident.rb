@@ -20,6 +20,8 @@ class Resident < ActiveRecord::Base
     :numericality => {:only_integer => true, message: "enter numbers only: 1234567890"}, 
     length: {is: 10, message: "is the wrong length (should be 10 digits)"}
 
+  validates :username, presence: true, uniqueness: true, on: :create 
+
   after_validation :set_apartment_id, on: :create
   before_save :generate_slug
 
@@ -28,7 +30,10 @@ class Resident < ActiveRecord::Base
   end
 
   def admin?
-    self.role == 'admin'
+    if self.username == "admin" then 
+      self.role = 'admin'
+      true
+    end
   end
 
   def generate_slug

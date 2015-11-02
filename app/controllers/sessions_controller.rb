@@ -1,3 +1,4 @@
+
 class SessionsController < ApplicationController
 
   def new #display login form in new.html.erb

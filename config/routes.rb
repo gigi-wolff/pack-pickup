@@ -4,6 +4,7 @@ PackPickup::Application.routes.draw do
   #create a named route called register automatically
   #CRUD is not applicable so resource is not an appropriate choice,
   #instead manually build routes 
+  get '/register', to: 'residents#new'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
