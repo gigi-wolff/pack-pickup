@@ -1,5 +1,6 @@
 class Resident < ActiveRecord::Base
   belongs_to :apartment #can call a Resident method on any Apartment object
+
   #dependent: :destroy, rails will destroy all packages associated with resident
   has_many :packages, dependent: :destroy 
 
@@ -22,10 +23,10 @@ class Resident < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true, on: :create 
 
-  after_validation :set_apartment_id, on: :create
+  #after_validation :set_apartment_id, on: :create
   before_save :generate_slug
 
-  def set_apartment_id
+  def set_apartment_id    
     self.apartment_id = Apartment.find_by(apartment_number: self.apartment_number).id
   end
 
