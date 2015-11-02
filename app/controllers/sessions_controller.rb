@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
     # no errors are generated, must manually validate resident information
     # get resident obj
     resident = Resident.where(username: params[:username]).first #.where returns an array
-
+    puts '-------------- resident --------------'
+    puts resident
     if resident && resident.authenticate(params[:password])
       #session is browser cookie
       #save resident_id not object due to size limit of session
