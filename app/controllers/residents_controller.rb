@@ -1,10 +1,11 @@
 class ResidentsController < ApplicationController
   #before_action :require_admin, except: [:edit, :update, :show]
   #before_action :require_user
-  #before_action :require_admin, only: [:index, :destroy]
-  #before_action :require_user, except: [:new, :create]
+
+  before_action :require_admin, only: [:index, :destroy]
+  before_action :require_user, except: [:new, :create]
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
-  #before_action :require_current_user, only: [:edit, :update, :show]
+  before_action :require_current_user, only: [:edit, :update, :show]
 
   # GET '/'
   def index  
