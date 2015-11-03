@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029142352) do
+ActiveRecord::Schema.define(version: 20151103195703) do
 
   create_table "apartments", force: true do |t|
     t.string   "apartment_number"
     t.string   "description"
     t.integer  "rent"
-    t.datetime "date_available"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

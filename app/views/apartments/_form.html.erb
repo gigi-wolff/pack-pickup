@@ -17,11 +17,6 @@
       <br/>
       <%= f.text_field :rent %>
     </div>
-      <div class = 'control-group'>
-      <%= f.label :date_available %>
-      <br/>
-      <%= f.date_field :date_available%>
-    </div>
     <br/>  
     <%= f.submit(@apartment.new_record? ? 'Create Apartment' : 'Update Apartment', class:'btn btn-primary')%>
   <% end %>
