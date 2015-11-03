@@ -13,7 +13,11 @@
     <tbody>   
         <% @residents.each do |r| %>
           <tr>
-            <td><%= link_to("(delete)", r, method: :delete, data: { confirm: "You sure?" }) %> </td>
+            <%if r==current_user %>
+              <td> </td>
+            <%else%>
+              <td><%= link_to("(delete)", r, method: :delete, data: { confirm: "You sure?" }) %> </td>
+            <%end%>
             <td> <%= link_to(r.apartment_number, edit_resident_path(r)) %> </td>
             <td> 
               <%= link_to("#{r.package_count.to_i}", resident_path(r)) %> </td>
