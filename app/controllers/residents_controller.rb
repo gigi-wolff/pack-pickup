@@ -32,11 +32,13 @@ class ResidentsController < ApplicationController
     # using verb method="resident" which is routed to residents#create.
     # @resident, is populated with values submitted from the form
     @resident = Resident.new(resident_params) 
+    #associate apartment with resident
+    @apartment = Apartment.find_by(apartment_number: resident_params[:apartment_number])
+    @resident.apartment = @apartment
     if @resident.save #@resident.save returns "false" if can't save
       flash[:notice] = "Resident was added"
       #redirect must be a url
       redirect_to residents_path #goes to index action 
-      #redirect_to login_path
     else
     #validation error occured. We must render to have access to 
     #"resident.error.full_messages" array to display generated errors   
