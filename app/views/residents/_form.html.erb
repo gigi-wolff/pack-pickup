@@ -32,17 +32,18 @@
         <%= f.text_field :last_name, readonly: true %>
       <% end %>
     </div>
+    </br>
   </fieldset>
     <div class = 'control-group'>
       <%= f.label :phone_personal %>
       <br/>
-      <%= f.text_field :phone_personal%>
+      <%= f.text_field :phone_personal%><h6>(digits only: 123456789)</h6>
     </div>
-
+    </br>
     <div class = 'control-group'>
       <%= f.label :phone_work %>
-      <br/>
-      <%= f.text_field :phone_work%>
+      <br/>     
+      <%= f.text_field :phone_work%><h6>(digits only: 123456789)</h6>
     </div>
     <br/>
 

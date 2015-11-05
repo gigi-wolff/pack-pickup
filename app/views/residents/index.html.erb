@@ -7,7 +7,8 @@
         <th>Add/Update Packages for Pickup:</th>
         <th>First Name:</th>
         <th>Last Name:</th>
-        <th>Phone:</th>
+        <th>Personal Phone:</th>
+        <th>Work Phone:</th>
       </tr>
     </thead>
     <tbody>   
@@ -23,7 +24,8 @@
               <%= link_to("#{r.package_count.to_i}", resident_path(r)) %> </td>
             <td><%= r.first_name%></td>
             <td><%= r.last_name%></td>
-            <td><%= r.phone_personal.to_s(:phone, area_code: true)%></td>            
+            <td><%= number_to_phone(r.phone_personal, area_code: true)%></td>     
+            <td><%= number_to_phone(r.phone_work, area_code: true)%></td>          
           </tr>
         <% end %>   
     </tbody>

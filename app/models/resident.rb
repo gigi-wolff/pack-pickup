@@ -14,11 +14,12 @@ class Resident < ActiveRecord::Base
   validates_presence_of :first_name, :last_name
 
   validates :phone_personal,
-    :numericality => {:only_integer => true, message: "numbers only: 1234567890"}, 
+    :with => /\A^[0-9]\z/, message:"should contain only digits please",
     length: {is: 10, message: "is the wrong length (should be 10 digits)"} 
+    #:numericality => {:only_integer => true, message: "numbers only: 1234567890"}, 
 
-  validates :phone_work, 
-    :numericality => {:only_integer => true, message: "enter numbers only: 1234567890"}, 
+  validates_format_of :phone_work, 
+    :with => /\A^[0-9]\z/, message:"should contain only digits please", 
     length: {is: 10, message: "is the wrong length (should be 10 digits)"}
 
   validates :username, presence: true, uniqueness: true, on: :create 
