@@ -81,8 +81,8 @@ class ResidentsController < ApplicationController
   def resident_params
     #use strong parameters to expose the fields we're interested in
     #require top level key be resident and allow changes to fields
-    params.require(:resident).permit(:apartment_number, :first_name,:last_name,:phone_personal,
-      :phone_work, :username, :password)
+    params.require(:resident).permit(:apartment_number, :first_name,:last_name,:personal_phone,
+      :work_phone, :username, :password)
     #To permit all attributes 
     #params.require(:resident).permit!
   end

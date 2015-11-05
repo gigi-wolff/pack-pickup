@@ -3,8 +3,8 @@ class CreateResidents < ActiveRecord::Migration
     create_table :residents do |t|
       t.string :first_name
       t.string :last_name
-      t.integer :phone_personal
-      t.integer :phone_work 
+      t.integer :personal_phone
+      t.integer :work_phone 
       t.integer :apartment_id
     end
   end

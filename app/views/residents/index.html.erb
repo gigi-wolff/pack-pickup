@@ -24,8 +24,8 @@
               <%= link_to("#{r.package_count.to_i}", resident_path(r)) %> </td>
             <td><%= r.first_name%></td>
             <td><%= r.last_name%></td>
-            <td><%= number_to_phone(r.phone_personal, area_code: true)%></td>     
-            <td><%= number_to_phone(r.phone_work, area_code: true)%></td>          
+            <td><%= number_to_phone(r.personal_phone, area_code: true)%></td>     
+            <td><%= number_to_phone(r.work_phone, area_code: true)%></td>          
           </tr>
         <% end %>   
     </tbody>

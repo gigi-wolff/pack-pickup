@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104224559) do
+ActiveRecord::Schema.define(version: 20151105015444) do
 
   create_table "apartments", force: true do |t|
     t.string   "apartment_number"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20151104224559) do
   create_table "residents", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "phone_personal"
-    t.string   "phone_work"
+    t.string   "personal_phone"
+    t.string   "work_phone"
     t.integer  "apartment_id"
     t.string   "apartment_number"
     t.datetime "created_at"
