@@ -1,5 +1,5 @@
-$("#package_state").html("Updated").css("background-color", "#dff0d8");
-$("#arrived").css("background-color", "#dff0d8");
-$("#delivered").css("background-color", "#dff0d8");
-$("#package_picked_up").attr('readonly', true).css("background-color", "#dff0d8");
-$("#update_button").hide();
+$("#package_state_<%=@package.id%>").html("Updated").css("background-color", "#dff0d8");
+$("#arrived_<%=@package.id%>").css("background-color", "#dff0d8");
+$("#delivered_<%=@package.id%>").css("background-color", "#dff0d8");
+$("#package_picked_up_<%=(@package.id).to_s%>").attr('readonly', true).css("background-color", "#dff0d8");
+$("#update_button_<%=(@package.id).to_s%>").hide();

@@ -34,14 +34,15 @@
             <td><%= display_date(p.arrived)%></td>
             <td><%= display_date(p.picked_up)%></td>
           <%else%>
-            <td id="package_state">Open</td>
-            <td id="arrived"><%= display_date(p.arrived)%></td>
-            <td id="delivered">
+            <td id="package_state_<%=p.id%>">Open</td>
+            <td id="arrived_<%=p.id%>"><%= display_date(p.arrived)%></td>
+            <td id="delivered_<%=p.id%>">
               <%= form_for [obj, p], method:'patch', remote:true do |f| %>
               <%= render 'shared/errors', obj: p %>
               <div class = 'control-group'>
-                <%= f.datetime_local_field :picked_up, min: DateTime,:required => true %>
-                  <%= f.submit('Update', class:'btn btn-link', id:'update_button')%>
+                <%= f.datetime_local_field :picked_up, min: DateTime,:required => true,
+                id:"package_picked_up_"+(p.id).to_s %>
+                <%= f.submit('Update', class:'btn btn-link',id:"update_button_"+(p.id).to_s)%>
               </div>
               <% end %>
             </td>              

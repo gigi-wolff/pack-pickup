@@ -21,7 +21,7 @@ class PackagesController < ApplicationController
   # PATCH /residents/:resident_id/packages/:id
   #the general pattern used in the action create that handles
   #submission of model-backed forms 
-  def update # this is where the form displayed in 'edit' is submitted using verb "patch"
+   def update # this is where the form displayed in 'edit' is submitted using verb "patch"
     respond_to do |format|
       if @package.update(package_params)
         format.html do # html request
