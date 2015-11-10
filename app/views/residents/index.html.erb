@@ -1,17 +1,16 @@
-<div class="container text-center">        
+<div class="container">        
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Apartment:</th> 
-        <th>Contact Number:</th> 
+        <th>Apartment:</th>
         <th>Resident:</th>
-      </tr>
+        <th>Contact Number:</th>
+        </tr>
     </thead>
     <tbody>   
       <% @residents.each do |r| %>
         <tr>
           <td><%= r.apartment_number %> </td>
-          <td><%= number_to_phone(r.personal_phone, area_code: true)%></td>  
           <td>
             <ul class="nav nav-pills nav-stacked">
               <li class="dropdown">              
@@ -19,25 +18,28 @@
                   <%= r.first_name+" "+r.last_name %>
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to edit_resident_path(r) do %>
-                      Edit Profile
-                    <% end %>
+                  <li>
+                    <%= link_to edit_resident_path(r) do %>                    
+                     Edit Profile
+                    <% end %>                   
                   </li>
                   <li>
-                    <%= link_to resident_path(r) do %>
+                    <%= link_to resident_path(r) do %>                      
                       Show Packages
                     <% end %>
+                  </p>
                   </li>
                   <li class="divider"></li>
                   <li>
                     <%if r!=current_user %>
-                      <%= link_to("Delete Resident", r, method: :delete, data: { confirm: "You sure?" }) %> </td>
+                      <%= link_to("Delete Resident", r, method: :delete, data: { confirm: "You sure?" }) %>
                       <% end %>
-                  </li>
+                  </li>                  
                 </ul>
               </li>
             </ul>
           </td>
+          <td><%= number_to_phone(r.personal_phone, area_code: true)%></td> 
         </tr>         
       <% end %>   
     </tbody>

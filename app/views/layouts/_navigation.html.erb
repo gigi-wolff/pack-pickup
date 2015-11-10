@@ -1,9 +1,4 @@
-<h2> Package Pick-up 
-<%=# unless logged_in? 
-   #   link_to 'Register', register_path, class: 'btn btn-primary btn-large'
-   # end
-%>
-</h2>
+<h2> Package Pick-up </h2>
 
 <% if logged_in? %>
   <ul class="nav nav-tabs">
@@ -26,20 +21,16 @@
         </li>
       </ul>
     </li>
-    <% if current_user.admin? %> 
-      <li>
-        <%= link_to 'All Residents', residents_path %>
-      </li>
-      <li>
-        <%= link_to 'Add Resident', new_resident_path %>
-      </li>
-      <li>
-        <%= link_to 'Apartments', apartments_path %>
-      </li>    
-    <% end %> 
     <p class='pull-right'> 
      <%= link_to 'Logout', logout_path, class: 'btn btn-danger btn-large'%> 
     </p>
+    <% if current_user.admin? %> 
+    <div class="btn-group btn-group-justified">      
+        <%= link_to 'All Residents', residents_path, class: 'btn btn-primary btn-large' %>   
+        <%= link_to 'Add Resident', new_resident_path, class: 'btn btn-primary btn-large' %>      
+        <%= link_to 'Apartments', apartments_path, class: 'btn btn-primary btn-large' %>         
+    </div> 
+    <% end %> 
   </ul> 
 <% end %>
 
