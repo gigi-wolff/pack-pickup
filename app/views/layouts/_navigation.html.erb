@@ -8,17 +8,20 @@
         <span class='caret'></span>
       <% end %>
       <ul class='dropdown-menu'>
-        <li>
-          <%= link_to edit_resident_path(current_user) do %>
-            <i class='icon-pencil'></i>edit profile
-          <% end %>
-        </li>
-        <li>
-          <%= link_to resident_path(current_user) do %>
-             <i class='icon-home'></i>
-              show packages
-          <% end %>
-        </li>
+        <% if params[:action]=="show"%>
+          <li>
+            <%= link_to edit_resident_path(current_user) do %>
+              <i class='icon-pencil'></i>edit profile
+            <% end %>
+          </li>
+        <%else%>
+          <li>
+            <%= link_to resident_path(current_user) do %>
+               <i class='icon-home'></i>
+                show packages
+            <% end %>
+          </li>
+        <%end%>
       </ul>
     </li>
     <p class='pull-right'> 
