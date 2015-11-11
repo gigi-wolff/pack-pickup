@@ -1,39 +1,41 @@
 <h2> Package Pick-up </h2>
 
 <% if logged_in? %>
+  <p class='pull-right'> 
+    <%= link_to 'Logout', logout_path, class: 'btn btn-danger btn-large'%> 
+  </p>
   <ul class="nav nav-tabs">
-    <li class="active">
-      <%= link_to('', class: 'btn btn-large dropdown-toggle', 'data-toggle' => 'dropdown') do %>
-        <%= current_user.first_name %>
-        <span class='caret'></span>
-      <% end %>
-      <ul class='dropdown-menu'>
-        <% if params[:action]=="show"%>
-          <li>
-            <%= link_to edit_resident_path(current_user) do %>
-              <i class='icon-pencil'></i>edit profile
-            <% end %>
-          </li>
-        <%else%>
-          <li>
-            <%= link_to resident_path(current_user) do %>
-               <i class='icon-home'></i>
-                show packages
-            <% end %>
-          </li>
-        <%end%>
-      </ul>
-    </li>
-    <p class='pull-right'> 
-     <%= link_to 'Logout', logout_path, class: 'btn btn-danger btn-large'%> 
-    </p>
     <% if current_user.admin? %> 
-    <div class="btn-group btn-group-justified">      
-        <%= link_to 'All Residents', residents_path, class: 'btn btn-primary btn-large' %>   
-        <%= link_to 'Add Resident', new_resident_path, class: 'btn btn-primary btn-large' %>      
-        <%= link_to 'Apartments', apartments_path, class: 'btn btn-primary btn-large' %>         
-    </div> 
-    <% end %> 
+      <div class="btn-group btn-group-justified">      
+          <%= link_to 'Residents', residents_path, class: 'btn btn-primary btn-large' %>   
+          <%= link_to 'Add Resident', new_resident_path, class: 'btn btn-primary btn-large' %>      
+          <%= link_to 'Apartments', apartments_path, class: 'btn btn-primary btn-large' %>         
+      </div> 
+    <%else%> 
+      <li class="active">
+        <%= link_to('', class: 'btn btn-large dropdown-toggle', 'data-toggle' => 'dropdown') do %>
+          <%= current_user.first_name %>
+          <span class='caret'></span>
+        <% end %>
+        <ul class='dropdown-menu'>
+          <% if params[:action]=="show"%>
+            <li>
+              <%= link_to edit_resident_path(current_user) do %>
+                <i class='icon-pencil'></i>edit profile
+              <% end %>
+            </li>
+          <%else%>
+            <li>
+              <%= link_to resident_path(current_user) do %>
+                 <i class='icon-home'></i>
+                  show packages
+              <% end %>
+            </li>
+          <%end%>
+        </ul>
+      </li>
+    <%end%>
+
   </ul> 
 <% end %>
 
