@@ -29,12 +29,12 @@
                     <% end %>
                   </p>
                   </li>
-                  <li class="divider"></li>
-                  <li>
-                    <%if r!=current_user %>
-                      <%= link_to("Delete Resident", r, method: :delete, data: { confirm: "You sure?" }) %>
-                      <% end %>
-                  </li>                  
+                  <%if r!=current_user %>
+                    <li class="divider"></li>
+                    <li>
+                      <%= link_to("Delete Resident", r, method: :delete, data: { confirm: "You sure?" }) %>                      
+                    </li> 
+                  <%end%>                 
                 </ul>
               </li>
             </ul>
